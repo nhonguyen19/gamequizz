@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:game_quizz/Screens/start_login/login.dart';
-import 'package:game_quizz/Screens/start_login/widgets.dart';
+import 'package:game_quizz/Screens/login.dart';
+import 'package:game_quizz/Screens/widgets.dart';
 import 'package:game_quizz/main.dart';
 
 const edgeInsets = EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0);
