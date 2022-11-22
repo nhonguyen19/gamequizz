@@ -25,7 +25,7 @@ class QuestionsList {
     ),
     Question(
       question: 'Trái đất bao nhiêu tuổi',
-      answer: '4,54 tỉ năm ',
+      answer: '4,54 tỉ năm',
       choices: [
         '1,54 trăm năm',
         '4,54 tỉ năm',

@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:game_quizz/Screens/home.dart';
-import 'package:game_quizz/Screens/nextpage.dart';
-import 'package:game_quizz/Screens/widgets.dart';
+import 'package:game_quizz/screens/home.dart';
+import 'package:game_quizz/screens/nextpage.dart';
+import 'package:game_quizz/screens/widgets.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:game_quizz/play/components/customStartButton.dart';
 import 'package:game_quizz/provider/google_sign_in.dart';

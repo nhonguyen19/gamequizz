@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:game_quizz/Screens/home.dart';
+import 'package:game_quizz/screens/home.dart';
 import 'package:game_quizz/play/components/customChoicesButton.dart';
 import 'package:game_quizz/play/components/custome_alert.dart';
 import 'package:game_quizz/play/components/gameInfoRow.dart';
@@ -7,7 +7,6 @@ import 'package:game_quizz/play/components/helping_icons_row.dart';
 import 'package:game_quizz/play/components/presentCurrentQuestion.dart';
 import 'package:game_quizz/play/util/balance_list.dart';
 import 'package:game_quizz/play/util/question_list.dart';
-import 'package:game_quizz/play/views/logo_page.dart';
 
 class QuestionsPage extends StatefulWidget {
   static final id = 'QuestionsPage';
@@ -39,7 +38,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color.fromARGB(255, 0, 54, 18),
       body: SafeArea(
         child: Center(
           // main coulmn for all UI elements
@@ -55,7 +54,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
                   customAlert(
                     context: context,
                     title: "Huỷ trò chơi",
-                    desc: "$currentBalance ",
+                    desc: "Bạn chỉ có $currentBalance Xu. Hãy thử lại nhé!",
                     text: "Thoát",
                     onPressed: () {
                       setState(() {
@@ -86,18 +85,15 @@ class _QuestionsPageState extends State<QuestionsPage> {
                 },
               ),
 
-              // Row for present Question number and Balance ----------------------------------
-              // this row contain two coloumns, one for balance and one for question number
+           
               gameInfoRow(
                 currentBalanceValue: currentBalance,
                 currentQustionNumber: currentQuestionNum,
               ),
 
-              // the question ----------------------------------------------------
+              
               presentCurrentQuestion(theQuestion: questionBank.getQuestion()),
 
-              // the options -----------------------------------------------
-              // first option
               customChoicesButton(
                 buttonPadding: EdgeInsets.fromLTRB(0, 15, 0, 5),
                 onPressed: () {
@@ -177,7 +173,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
       }
     });
 
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 2));
 
     setState(() {
       if (userPickedAnswer != correctAnswer) {
@@ -191,10 +187,10 @@ class _QuestionsPageState extends State<QuestionsPage> {
                       MaterialPageRoute(builder: (context) => HomeScreen()));
                 },
                 title: 'Thua ',
-                desc: " $loosingBalance ",
+                desc: "Tiếc quá bạn chỉ có $loosingBalance Xu. Hãy thử lại nào.",
                 text: 'Đồng ý')
             .show();
-      } else if (currentQuestionNum + 1 > 15) {
+      } else if (currentQuestionNum + 1 > 4) {
         customAlert(
           context: context,
           onPressed: () {
@@ -204,8 +200,8 @@ class _QuestionsPageState extends State<QuestionsPage> {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => HomeScreen()));
           },
-          title: "Thắng",
-          desc: "Chúc mừng bạn đã giành được $currentBalance ",
+          title: "Chiến thắng",
+          desc: "Chúc mừng bạn đã giành được $currentBalance Xu",
           text: "Đồng ý",
         ).show();
       } else {

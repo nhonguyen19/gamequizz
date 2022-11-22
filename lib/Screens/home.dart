@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:game_quizz/Screens/Start_Screens.dart';
+import 'package:game_quizz/screens/Start_Screens.dart';
 import 'package:game_quizz/play/views/questions_page.dart';
 import 'package:game_quizz/provider/google_sign_in.dart';
+import 'package:game_quizz/screens/leader.dart';
+import 'package:game_quizz/screens/leaderboard_screen.dart';
+import 'package:game_quizz/screens/nextpage.dart';
+import 'package:game_quizz/screens/widgets.dart';
 import 'package:provider/provider.dart';
 
 import 'login.dart';
@@ -35,7 +38,9 @@ class _HomeScreenState extends State<HomeScreen> {
         img: "assets/lichsu.jpg",
         icon: Icons.history_rounded,
         title: "Lịch Sử"),
-    Item(img: "assets/dialy.png", icon: Icons.sunny_snowing, title: "Địa Lí"),
+    Item(img: "assets/dialy.png",
+         icon: Icons.sunny_snowing, 
+         title: "Địa Lí"),
     Item(
         img: "assets/tunhien.png",
         icon: Icons.nature_outlined,
@@ -55,7 +60,8 @@ class _HomeScreenState extends State<HomeScreen> {
       padding: const EdgeInsets.all(8.0),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Home'),
+          backgroundColor: Color.fromARGB(255, 28, 100, 0),
+          title: Center(child: Text('Home'),),
           elevation: 4.0,
           actions: const <Widget>[
             Center(
@@ -72,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
               DrawerHeader(
                 child: HeaderBuild(context),
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: Color.fromARGB(255, 28, 100, 0),
                 ),
               ),
               ListTile(
@@ -90,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Icons.dashboard_outlined,
                 ),
                 onTap: () {
-                  Navigator.pop(context);
+                  nextpage(context, LeaderboardScreen());
                 },
               ),
               ListTile(
@@ -120,12 +126,15 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: cardItem(_currentIndex),
         bottomNavigationBar: BottomNavigationBar(
-          onTap: onTabTapped,
+          onTap: ((value) {
+            nextpage(context, LeaderboardScreen());
+          }),
           currentIndex: _currentIndex,
-          items: const <BottomNavigationBarItem>[
+          items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              label: 'Home',
+              icon: Icon(Icons.leaderboard),
+              label: '',
+              activeIcon: Leader(),
             ),
           ],
         ),
@@ -141,33 +150,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget HeaderBuild(BuildContext context) {
     var user = FirebaseAuth.instance.currentUser!;
-    return user!=null?Container(
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).padding.top,
-      ),
-      child: Stack(
-        children: [
-          Card(
-            color: Colors.blue,
-            elevation: 40,
-            child: ListTile(
-              leading: CircleAvatar(
-                radius: 20,
-                backgroundImage:NetworkImage(user.photoURL!),
-              ),
-              title: Text(
-                '${user.displayName!}',
-                style: TextStyle(color: Colors.white),
-              ),
-              subtitle: Text(
-                '${user.email!}',
-                style: TextStyle(color: Colors.white),
-              ),
+    return user != null? UserAccountsDrawerHeader(
+            decoration: BoxDecoration(
+               color: Color.fromARGB(255, 28, 100, 0),
             ),
-          ),
-        ],
-      ),
-    ):Center(child: CircularProgressIndicator(),);
+            accountName: Text('${user.displayName!}',),
+            accountEmail: Text('${user.email!}'),
+            currentAccountPicture: CircleAvatar(
+            backgroundImage: NetworkImage(user.photoURL!, scale: 20),
+            backgroundColor: Color.fromARGB(255, 28, 100, 0),
+            ),
+          )
+        : Center(
+            child: CircularProgressIndicator(),
+          );
   }
 
   Widget cardItem(int i) {
@@ -181,25 +177,27 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () {
               if (index == 0) {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => QuestionsPage(),
-                    ));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => QuestionsPage(),
+                  ),
+                );
               }
             },
             child: Card(
-                clipBehavior: Clip.antiAlias,
-                elevation: 2.0,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: <Widget>[
-                      Expanded(child: Image.asset(listItem[index].img!)),
-                      Icon(listItem[index].icon),
-                      Text(listItem[index].title!),
-                    ],
-                  ),
-                )),
+              clipBehavior: Clip.antiAlias,
+              elevation: 2.0,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: <Widget>[
+                    Expanded(child: Image.asset(listItem[index].img!)),
+                    Icon(listItem[index].icon),
+                    Text(listItem[index].title!),
+                  ],
+                ),
+              ),
+            ),
           );
         });
   }

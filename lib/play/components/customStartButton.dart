@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:game_quizz/play/views/questions_page.dart';
+import 'package:game_quizz/screens/login.dart';
+import 'package:game_quizz/screens/nextpage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Container customStartButton({required BuildContext context}) {
@@ -9,7 +11,7 @@ Container customStartButton({required BuildContext context}) {
       padding: EdgeInsets.fromLTRB(0, 5, 0, 15),
       child: TextButton(
         onPressed: () {
-          Navigator.pushNamed(context, QuestionsPage.id);
+          nextpage(context, LoginApp());
         },
         child: Container(
           width: 250,
@@ -21,17 +23,17 @@ Container customStartButton({required BuildContext context}) {
             ),
           ),
           child: Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
                 'Bắt đầu',
-                style:GoogleFonts.cairo(
-            textStyle: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.w700,
-              color: Colors.white,
-            ),
-          ),
+                style: GoogleFonts.cairo(
+                  textStyle: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
           ),

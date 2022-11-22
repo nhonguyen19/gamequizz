@@ -1,20 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:game_quizz/Screens/home.dart';
-import 'package:game_quizz/Screens/Register.dart';
-import 'package:game_quizz/Screens/login.dart';
+import 'package:game_quizz/screens/home.dart';
+import 'package:game_quizz/screens/Register.dart';
+import 'package:game_quizz/screens/leaderboard_screen.dart';
+import 'package:game_quizz/screens/login.dart';
 import 'package:game_quizz/play/routes/routes.dart';
-import 'package:game_quizz/play/views/logo_page.dart';
 import 'package:game_quizz/provider/google_sign_in.dart';
 import 'package:provider/provider.dart';
-import 'Screens/Start_Screens.dart';
-import 'Screens/home_screen.dart';
+import 'screens/Start_Screens.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-     home: LoginApp(),
+     home: StartScreen(),
     ),
     );
   

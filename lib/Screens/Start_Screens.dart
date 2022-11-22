@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:game_quizz/Screens/login.dart';
-import 'package:game_quizz/Screens/widgets.dart';
+import 'package:game_quizz/screens/login.dart';
+import 'package:game_quizz/screens/widgets.dart';
 import 'package:game_quizz/main.dart';
+
+import '../play/components/customStartButton.dart';
 
 const edgeInsets = EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0);
 
@@ -11,49 +13,29 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        brightness: Brightness.light,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Column(
+        body: Container(
+          color: Colors.white,
+          child: Center(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: 30),
-                Image.asset(
-                  "assets/image.png",
-                  width: 100,
-                  height: 100,
+                Center(
+                  child: text_quizz(context),
                 ),
-                text_quizz(context),
+                SizedBox(height: 60,),
+                // Logo image
+                Image.asset(
+                  'assets/image.png',
+                  width: 300,
+                  height: 300,
+                ),
+                 SizedBox(height: 60,),
+                // Start button
+                customStartButton(context: context),
               ],
             ),
-            Column(
-              children: [
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => LoginApp()));
-                    },
-                    child: Text(
-                      'Start',
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.w400),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: Size(200, 60),
-                      shape: StadiumBorder(),
-                      padding: edgeInsets,
-                    ))
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:game_quizz/Screens/login.dart';
-import 'package:game_quizz/Screens/widgets.dart';
+import 'package:game_quizz/screens/login.dart';
+import 'package:game_quizz/screens/widgets.dart';
 
 class Register extends StatelessWidget {
   const Register({super.key});
