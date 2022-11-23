@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:game_quizz/screens/home.dart';
 import 'package:game_quizz/play/components/customChoicesButton.dart';
@@ -25,7 +27,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
   //* these variable for check if user use 50/50   and switch question or not
   bool is5050Used = false;
   bool isSwitchUsed = false;
-  //this variable used to (recognize the choosen answer number)to change background of answer_box
+  //this variable used to (recognize the choosen answer number)to change background of answer_box5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
   String userclickedNumber = '0';
 // to save the choises btn backgrounds
   Map<String, String> buttonbackground = {
@@ -34,9 +36,27 @@ class _QuestionsPageState extends State<QuestionsPage> {
     '3': 'answer_box',
     '4': 'answer_box'
   };
+  @override
+  static const maxSeconds = 5;
+  int seconds = maxSeconds;
+  Timer? timer;
+  void startTimer() {
+    timer = Timer.periodic(Duration(seconds: 1), (_) {
+      setState(() => seconds--);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (seconds == 0) {
+      timer?.cancel();
+    }
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 0, 54, 18),
       body: SafeArea(
@@ -84,14 +104,16 @@ class _QuestionsPageState extends State<QuestionsPage> {
                   });
                 },
               ),
-
-           
+                
+            
               gameInfoRow(
                 currentBalanceValue: currentBalance,
                 currentQustionNumber: currentQuestionNum,
               ),
-
-              
+              //Thời gian
+               Center(child:  
+                buildTimer(),
+              ),
               presentCurrentQuestion(theQuestion: questionBank.getQuestion()),
 
               customChoicesButton(
@@ -187,7 +209,8 @@ class _QuestionsPageState extends State<QuestionsPage> {
                       MaterialPageRoute(builder: (context) => HomeScreen()));
                 },
                 title: 'Thua ',
-                desc: "Tiếc quá bạn chỉ có $loosingBalance Xu. Hãy thử lại nào.",
+                desc:
+                    "Tiếc quá bạn chỉ có $loosingBalance Xu. Hãy thử lại nào.",
                 text: 'Đồng ý')
             .show();
       } else if (currentQuestionNum + 1 > 4) {
@@ -219,4 +242,30 @@ class _QuestionsPageState extends State<QuestionsPage> {
     isSwitchUsed = false;
     ListOfBalance().resetBalanceCounter();
   }
+
+  //thời gian
+  Widget buildTime() {
+    return Text(
+      '$seconds',
+      style: const TextStyle(
+          fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+    );
+  }
+
+  Widget buildTimer() => SizedBox(
+        width: 50,
+        height: 50,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            CircularProgressIndicator(
+              value: seconds / maxSeconds,
+              valueColor: AlwaysStoppedAnimation(Colors.greenAccent),
+              strokeWidth: 10,
+              backgroundColor: Colors.red,
+            ),
+            Center(child: buildTime())
+          ],
+        ),
+      );
 }

@@ -10,11 +10,10 @@ Row gameInfoRow({
     mainAxisAlignment: MainAxisAlignment.spaceAround,
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
-      // first column for balance title and balance data
-      currentGameInfo(title: 'Game', info: '$currentBalanceValue Xu'),
-      // second column for question number title and question number
+
+      currentGameInfo(title: 'Xu', info: '$currentBalanceValue Xu'),
       currentGameInfo(
-          title: 'Câu hỏi: ', info: '$currentQustionNumber'),
+          title: 'Câu hỏi', info: '$currentQustionNumber'),
     ],
   );
 }

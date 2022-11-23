@@ -19,6 +19,7 @@ class LoginApp extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _input(context),
               _signup(context),

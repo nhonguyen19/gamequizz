@@ -75,11 +75,12 @@ class QuestionsList {
     }
   }
 
-  //* 50/50 function: used when the user want to remove tow option
+
+  //* 50/50 
   void removTowOption() {
-    //*this variable is for loop counter
+    
     int counter = 0;
-    //*this variable used to insure that the options thant remove does not exceed 2
+  
     int myCoun = 0;
     for (counter = 0; counter <= 3; counter++) {
       if (_questionsBank[_currentQuestion].choices[counter] !=
@@ -91,7 +92,6 @@ class QuestionsList {
     }
   }
 
-  //* Replace Question is to skip the current question
   void replaceQuestion() {
     _currentQuestion++;
   }
